@@ -21,40 +21,49 @@ for(let i=0; i<rowSize; i++){
         }
         
         playingField[i][j].addEventListener('click', function(event){
-            console.log(i, j)
+            // console.log(i, j)
             if(player % 2 === 0){
+
+                // console.log(winner)
+
                 event.currentTarget.textContent = '🔵'
                 event.currentTarget.disabled = true
-                horisontalWinner(i, j, event.currentTarget.textContent)
+                
                 verticalWinner(i, j, event.currentTarget.textContent)
-                diagonalWinner(i, j, event.currentTarget.textContent)
+                
+                horisontalWinner(i, j, event.currentTarget.textContent)
+                
+                // diagonalWinner(i, j, event.currentTarget.textContent)
                 playerTurn.textContent = "Player two's turn."
 
-                if(winner>4){
-                    for(let i=0; i<rowSize; i++){
-                        for(let j = 0; j<rowSize; j++){
-                            playingField[i][j].disabled = true
-                        }
-                    }
-                }
+                // console.log(winner)
+                // if(!winner<5){
+                //     for(let i=0; i<rowSize; i++){
+                //         for(let j = 0; j<rowSize; j++){
+                //             playingField[i][j].disabled = true
+                //         }
+                //     }
+                // }
             }
             else{
+
+                // console.log("andra " +winner)
                 event.currentTarget.textContent = '❌'
                 event.currentTarget.disabled = true
-                horisontalWinner(i, j, event.currentTarget.textContent)
+                
                 verticalWinner(i, j, event.currentTarget.textContent)
-                diagonalWinner(i, j, event.currentTarget.textContent)
+                
+                horisontalWinner(i, j, event.currentTarget.textContent)
+                
+                // diagonalWinner(i, j, event.currentTarget.textContent)
                 playerTurn.textContent = "Player one's turn."
 
-                if(winner>=5){
-                    for(let i=0; i<rowSize; i++){
-                        for(let j = 0; j<rowSize; j++){
-                            playingField[i][j].disabled = true
-                        }
-                    }
-                }
+                // console.log("andra " +winner)
+
+
             }
             player++
+            winner = 0
         })
     }
 }
@@ -90,38 +99,48 @@ function verticalWinner(row, col, content){
         endRow = rowSize - 1
     }
 
-    for (let i = startRow+1; i <= endRow-1; i++) {
+    for (let i = startRow; i <= endRow; i++) {
     
+        
 
         if(player % 2 === 0){
-            if(winner<5){
-                if(playingField[i][col].textContent === '🔵'){
-                    winner++
-                }else{
-                    winner = 0
+            if(playingField[i][col].textContent === '🔵'){
+                winner++
+
+                if (winner === 5) {
+                    youWon.textContent = 'PLAYER ONE WON!!!'
+                    body.prepend(youWon)
+                    for(let i=0; i<rowSize; i++){
+                        for(let j = 0; j<rowSize; j++){
+                            playingField[i][j].disabled = true
+                        }
+                    }
+                break
                 }
             }else{
-                youWon.textContent = 'PLAYER ONE WON!!!'
-                body.prepend(youWon)
-                break
+                winner = 0
             }
         }else{
-            if(winner<5){
-                if(playingField[i][col].textContent === '❌'){
-                    winner++
-                }else{
-                    winner = 0
+            if(playingField[i][col].textContent === '❌'){
+                winner++
+                if(winner === 5){
+                    youWon.textContent = 'PLAYER TWO WON!!!'
+                    body.prepend(youWon)
+                    for(let i=0; i<rowSize; i++){
+                        for(let j = 0; j<rowSize; j++){
+                            playingField[i][j].disabled = true
+                        }
+                    }
+                break
                 }
             }else{
-                youWon.textContent = 'PLAYER TWO WON!!!'
-                body.prepend(youWon)
-                break
+                    winner = 0
             }
         }
     }
+    winner = 0
 }
 
-winner = 0
 
 function horisontalWinner(row, col, content){
     // Nedan läser vågrätt
@@ -131,46 +150,47 @@ function horisontalWinner(row, col, content){
     }
 
     let endCol = col + 4
-    if(endCol>=rowSize){
-        endCol = rowSize - 1
+    if(endCol > rowSize - 1){
+        endCol = rowSize -1
     }
 
     for (let i = startCol; i <= endCol; i++) {
+        console.log(rowSize + " " + startCol + " " + endCol + " " + col)
+        console.log(row, i)
 
         if(player % 2 === 0){
-            if(winner<5){
-                
-                console.log(playingField[row][i])
+            if(playingField[row][i].textContent === '🔵'){
+                console.log("        " + row, i)
+                winner++
 
-                if(playingField[row][i].textContent === '🔵'){
-                    winner++
-                }else{
-                    winner = 0
+                if(winner === 5){
+                    youWon.textContent = 'PLAYER ONE WON!!!'
+                    body.prepend(youWon)
+                    for(let i=0; i<rowSize; i++){
+                        for(let j = 0; j<rowSize; j++){
+                            playingField[i][j].disabled = true
+                        }
+                    }
+                    break
                 }
-            
             }else{
-                youWon.textContent = 'PLAYER ONE WON!!!'
-                body.prepend(youWon)
-                break
+                winner = 0
             }
-        
         }else{
-            
-            if(winner<5){
-
-                console.log(playingField[row][i])
-
-                if(playingField[row][i].textContent === '❌'){
-                    winner++
-                }else{
-                    winner = 0
+            if(playingField[row][i].textContent === '❌'){
+                winner++
+                if(winner === 5){
+                    youWon.textContent = 'PLAYER TWO WON!!!'
+                    body.prepend(youWon)
+                    for(let i=0; i<rowSize; i++){
+                        for(let j = 0; j<rowSize; j++){
+                            playingField[i][j].disabled = true
+                        }
+                    }
+                    break
                 }
-            
             }else{
-            
-                youWon.textContent = 'PLAYER TWO WON!!!'
-                body.prepend(youWon)
-                break
+                winner = 0
             }
         }
     }
