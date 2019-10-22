@@ -36,12 +36,11 @@ for(let i=0; i<rowSize; i++){
                 
                 diagonalWinner(i, j, event.currentTarget.textContent)
 
+                invertedDiagonalWinner(i, j, event.currentTarget.textContent)
+
                 playerTurn.textContent = "Player two's turn."
             }
             else{
-
-                // console.log("andra " +winner)
-
                 event.currentTarget.textContent = '❌'
                 event.currentTarget.disabled = true
                 
@@ -51,9 +50,9 @@ for(let i=0; i<rowSize; i++){
                 
                 diagonalWinner(i, j, event.currentTarget.textContent)
 
-                playerTurn.textContent = "Player one's turn."
+                invertedDiagonalWinner(i, j, event.currentTarget.textContent)
 
-                // console.log("andra " +winner)
+                playerTurn.textContent = "Player one's turn."
             }
             player++
             winner = 0
@@ -61,14 +60,7 @@ for(let i=0; i<rowSize; i++){
     }
 }
 
-
-
 playerTurn = body.appendChild(h1Turn) // Vilken spelare
-playerTurn.textContent = "Player one's turn."
-
-// Style
-
-const buttonStyle = document.querySelectorAll('body')
 
     // Nedan läser lodrätt
 function verticalWinner(row, col, content){
@@ -181,7 +173,6 @@ function diagonalWinner(row, col, content){
     while(startDiagonalRow<0 || startDiagonalCol<0){
         startDiagonalCol++
         startDiagonalRow++
-        console.log(startDiagonalRow + "   " + startDiagonalCol)
     }
     
     let endDiagonalRow = row + 4
@@ -189,7 +180,6 @@ function diagonalWinner(row, col, content){
     while(endDiagonalCol > rowSize-1 || endDiagonalRow > rowSize-1){
         endDiagonalRow--
         endDiagonalCol--
-        console.log(endDiagonalRow + "   " + endDiagonalCol)
     }
 
     let endDiagonal = 0
@@ -200,10 +190,9 @@ function diagonalWinner(row, col, content){
     }
 
     for(let i = 0; i <= endDiagonal; i++){
-        if(startDiagonalRow + i > 9 || startDiagonalCol + i > 9){
+        if(startDiagonalRow + i >= rowSize || startDiagonalCol + i >= rowSize){
             break
         }
-        console.log(playingField[startDiagonalRow + i][startDiagonalCol + i])
         if(player % 2 === 0){
             if(playingField[startDiagonalRow + i][startDiagonalCol + i].textContent === '🔵'){
                 winner++
@@ -241,82 +230,70 @@ function diagonalWinner(row, col, content){
 }
 
 
-    // // let correctionOfEndDiagonal = 0
-    // let endDiagonal = 0
+// Nedan läser diagonalt +-/-+
 
-    // if(endDiagonalCol>endDiagonalRow){
-    //     // correctionOfEndDiagonal = endDiagonalRow-(rowSize+1)
-    //     endDiagonal = endDiagonalRow
-    // }else{
-    //     // correctionOfEndDiagonal = endDiagonalCol-(rowSize + 1)
-    //     endDiagonal = endDiagonalCol
-    // }
+function invertedDiagonalWinner(row, col, content){
 
+    let startInvertedDiagonalRow = row + 4
+    let startInvertedDiagonalCol = col - 4
 
+    while(startInvertedDiagonalRow > rowSize-1 || startInvertedDiagonalCol < 0){
+        startInvertedDiagonalCol++
+        startInvertedDiagonalRow--
+    }
+    
+    let endInvertedDiagonalRow = row - 4
+    let endInvertedDiagonalCol = col + 4
+    while(endInvertedDiagonalCol > rowSize-1 || endInvertedDiagonalRow < 0){
+        endInvertedDiagonalRow++
+        endInvertedDiagonalCol--
+    }
 
-    // if(endDiagonalCol>rowSize || endDiagonalRow>rowSize)
-    // endDiagonalRow = endDiagonalrow - correctionOfEndDiagonal
-    // endDiagonalCol = endDiagonalCol - correctionOfEndDiagonal
-
-    // console.log(playingField[startDiagonalRow][startDiagonalCol].firstChild.textContent)
-    // console.log(startDiagonalRow)
-    // console.log(startDiagonalCol)
-    // console.log(endDiagonalRow)
-    // console.log(endDiagonalCol)
-
-//     for(let i = 0; i<endDiagonal-1; i++){
-//         // console.log(playingField[startDiagonalRow+i][startDiagonalCol+i])
-//         if(player % 2 === 0){
-//             if(winner<5){
-
-//                 if(playingField[startDiagonalRow + i][startDiagonalCol + i].firstChild.textContent === '🔵'){
-//                     winner++
-//                 }else{
-//                     winner = 0
-//                 }
-//             }else{
-//                 youWon.textContent = 'PLAYER ONE WON!!!'
-//                 body.prepend(youWon)
-//                 break
-//             }
-//         }else{
-//             if(winner<5){
-
-//                 if(playingField[startDiagonalRow + i][startDiagonalCol + i].firstChild.textContent === '❌'){
-//                     winner++
-//                 }else{
-//                     winner = 0
-//                 }
-//             }else{
-//                 youWon.textContent = 'PLAYER TWO WON!!!'
-//                 body.prepend(youWon)
-//                 break
-//             }
-//         }
-//     }
-// }
-
-    //  i, j, event.currentTarget.textContent = row, col, content = playingField[i/row][j/col]
-
-    // let startRowBox = col - 4
-    // if(startRowCol<rowSize){
-    //     startRowCol = 0
-    // }
-
-
-    // let endColBox = (col + 4)
-    // if(endColBox>rowSize){
-    //     endColBox = rowSize - 1
-    // }
-
-    // let endRowBox = (row + 4)
-    // if(endRowBox>rowSize){
-    //     endRowBox = rowSize - 1
-    // }
-
-    // playingField[i/row][j/col]
-
-
+    let endInvertedDiagonal = 0
+    if(endInvertedDiagonalRow > endInvertedDiagonalCol){
+        endInvertedDiagonal = endInvertedDiagonalRow
+    }else{
+        endInvertedDiagonal = endInvertedDiagonalCol
+    }
+    for(let i = 0; i<endInvertedDiagonal; i++){
+        if(startInvertedDiagonalRow - i < 0 || startInvertedDiagonalCol + i >= rowSize){
+            break
+        }
+        if(player % 2 === 0){
+            if(playingField[startInvertedDiagonalRow - i][startInvertedDiagonalCol + i].textContent === '🔵'){
+                winner++
+                if(winner === 5){
+                    youWon.textContent = 'PLAYER ONE WON!!!'
+                    body.prepend(youWon)
+                    for(let i=0; i<rowSize; i++){
+                        for(let j = 0; j<rowSize; j++){
+                            playingField[i][j].disabled = true
+                        }
+                    }
+                    break
+                }
+            }else{
+                winner = 0
+            }
+        }else{
+            if(playingField[startInvertedDiagonalRow - i][startInvertedDiagonalCol + i].textContent === '❌'){
+                winner++
+                if(winner === 5){
+                    youWon.textContent = 'PLAYER TWO WON!!!'
+                    body.prepend(youWon)
+                    for(let i=0; i<rowSize; i++){
+                        for(let j = 0; j<rowSize; j++){
+                            playingField[i][j].disabled = true
+                        }
+                    }
+                    break
+                }
+            }else{
+                winner = 0
+            }
+        }
+    }
+}
 
 
 
