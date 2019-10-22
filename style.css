@@ -1,28 +1,20 @@
-.playerTurn {
-    font-size: 10px;
-    text-align: center;
-    align-content: center;
-    background-color: darkgrey;
-    padding-top: 23px;
-}
-
 body {
     align-content: center;
     align-items: center;
     text-align: center;
-    background-color: rgb(90, 167, 170);
+    background-color: #008083;
 }
 
 h1{
-    background-color: darkgrey;
-    margin: 30px;
+    color: #ffffff;
+    font-style: italic;
 }
 
 button{
     align-items: center;
     cursor: pointer;
     line-height: 24px;
-    height: 50px;
-    width: 50px;
-    background-color: cornsilk;
+    height: 48px;
+    width: 48px;
+    background-color: rgb(163, 163, 161);
 }

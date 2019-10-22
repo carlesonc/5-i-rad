@@ -4,7 +4,8 @@ const playingField = []
 let player = 0
 let winner = 0
 const youWon = document.createElement('h1')
-
+youWon.style.fontSize = '50px'
+youWon.style.marginTop = '1px'
 const body = document.querySelector('body')
 const h1Turn = document.createElement('h1')
 h1Turn.id = 'playerTurn'
@@ -102,12 +103,13 @@ function verticalWinner(row, col, content){
                 winner++
                 if (winner === 5) {
                     youWon.textContent = 'PLAYER ONE WON!!!'
-                    body.prepend(youWon)
+                    body.append(youWon)
                     for(let i=0; i<rowSize; i++){
                         for(let j = 0; j<rowSize; j++){
                             playingField[i][j].disabled = true
                         }
                     }
+                    playerTurn = body.removeChild(h1Turn)
                 break
                 }
             }else{
@@ -118,12 +120,13 @@ function verticalWinner(row, col, content){
                 winner++
                 if(winner === 5){
                     youWon.textContent = 'PLAYER TWO WON!!!'
-                    body.prepend(youWon)
+                    body.append(youWon)
                     for(let i=0; i<rowSize; i++){
                         for(let j = 0; j<rowSize; j++){
                             playingField[i][j].disabled = true
                         }
                     }
+                    playerTurn = body.removeChild(h1Turn)
                 break
                 }
             }else{
@@ -153,12 +156,13 @@ function horisontalWinner(row, col, content){
                 winner++
                 if(winner === 5){
                     youWon.textContent = 'PLAYER ONE WON!!!'
-                    body.prepend(youWon)
+                    body.append(youWon)
                     for(let i=0; i<rowSize; i++){
                         for(let j = 0; j<rowSize; j++){
                             playingField[i][j].disabled = true
                         }
                     }
+                    playerTurn = body.removeChild(h1Turn)
                     break
                 }
             }else{
@@ -169,12 +173,13 @@ function horisontalWinner(row, col, content){
                 winner++
                 if(winner === 5){
                     youWon.textContent = 'PLAYER TWO WON!!!'
-                    body.prepend(youWon)
+                    body.append(youWon)
                     for(let i=0; i<rowSize; i++){
                         for(let j = 0; j<rowSize; j++){
                             playingField[i][j].disabled = true
                         }
                     }
+                    playerTurn = body.removeChild(h1Turn)
                     break
                 }
             }else{
@@ -219,12 +224,13 @@ function diagonalWinner(row, col, content){
                 winner++
                 if(winner === 5){
                     youWon.textContent = 'PLAYER ONE WON!!!'
-                    body.prepend(youWon)
+                    body.append(youWon)
                     for(let i=0; i<rowSize; i++){
                         for(let j = 0; j<rowSize; j++){
                             playingField[i][j].disabled = true
                         }
                     }
+                    playerTurn = body.removeChild(h1Turn)
                     break
                 }
             }else{
@@ -235,12 +241,13 @@ function diagonalWinner(row, col, content){
                 winner++
                 if(winner === 5){
                     youWon.textContent = 'PLAYER TWO WON!!!'
-                    body.prepend(youWon)
+                    body.append(youWon)
                     for(let i=0; i<rowSize; i++){
                         for(let j = 0; j<rowSize; j++){
                             playingField[i][j].disabled = true
                         }
                     }
+                    playerTurn = body.removeChild(h1Turn)
                     break
                 }
             }else{
@@ -285,12 +292,13 @@ function invertedDiagonalWinner(row, col, content){
                 winner++
                 if(winner === 5){
                     youWon.textContent = 'PLAYER ONE WON!!!'
-                    body.prepend(youWon)
+                    body.append(youWon)
                     for(let i=0; i<rowSize; i++){
                         for(let j = 0; j<rowSize; j++){
                             playingField[i][j].disabled = true
                         }
                     }
+                    playerTurn = body.removeChild(h1Turn)
                     break
                 }
             }else{
@@ -301,12 +309,13 @@ function invertedDiagonalWinner(row, col, content){
                 winner++
                 if(winner === 5){
                     youWon.textContent = 'PLAYER TWO WON!!!'
-                    body.prepend(youWon)
+                    body.append(youWon)
                     for(let i=0; i<rowSize; i++){
                         for(let j = 0; j<rowSize; j++){
                             playingField[i][j].disabled = true
                         }
                     }
+                    playerTurn = body.removeChild(h1Turn)
                     break
                 }
             }else{
