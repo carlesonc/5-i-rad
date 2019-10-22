@@ -1,4 +1,5 @@
-const rowSize = 10
+const sizeButton = []
+let rowSize = 0
 const playingField = []
 let player = 0
 let winner = 0
@@ -8,59 +9,79 @@ const body = document.querySelector('body')
 const h1Turn = document.createElement('h1')
 h1Turn.id = 'playerTurn'
 
-                // Spelplanets funktion ovan
-for(let i=0; i<rowSize; i++){
-    playingField[i] = []
-    for(let j=0; j<rowSize; j++){
-        const button = document.createElement('button')
-        button.textContent = '◻️'
-        playingField[i][j] = body.appendChild(button)
-        
-        if(j === (rowSize-1)){
-            const rowBreak = document.createElement('br')
-            body.appendChild(rowBreak)
-        }
-        
-        playingField[i][j].addEventListener('click', function(event){
-            // console.log(i, j)
-            if(player % 2 === 0){
+                // Bestämmandet av storleken på spelplan
+const div = document.createElement('div')
+body.appendChild(div)
+for(let i = 0; i < 3; i++){
+    const button = document.createElement('button')
+    // button.style.fontSize = 100
+    button.textContent = (10 + (i * 5)) + 'x' + (10 + (i * 5))
+    sizeButton[i] = div.appendChild(button)
 
-                // console.log(winner)
-
-                event.currentTarget.textContent = '🔵'
-                event.currentTarget.disabled = true
-                
-                verticalWinner(i, j, event.currentTarget.textContent)
-                
-                horisontalWinner(i, j, event.currentTarget.textContent)
-                
-                diagonalWinner(i, j, event.currentTarget.textContent)
-
-                invertedDiagonalWinner(i, j, event.currentTarget.textContent)
-
-                playerTurn.textContent = "Player two's turn."
-            }
-            else{
-                event.currentTarget.textContent = '❌'
-                event.currentTarget.disabled = true
-                
-                verticalWinner(i, j, event.currentTarget.textContent)
-                
-                horisontalWinner(i, j, event.currentTarget.textContent)
-                
-                diagonalWinner(i, j, event.currentTarget.textContent)
-
-                invertedDiagonalWinner(i, j, event.currentTarget.textContent)
-
-                playerTurn.textContent = "Player one's turn."
-            }
-            player++
-            winner = 0
-        })
-    }
+    sizeButton[i].addEventListener('click', function(event){
+        rowSize = 10 + (i * 5)
+        console.log(rowSize)
+        makeBoard(rowSize)
+        body.removeChild(div)
+    })
 }
 
-playerTurn = body.appendChild(h1Turn) // Vilken spelare
+                // Spelplanets funktion nedanför
+function makeBoard(rowSize){
+    for(let i=0; i<rowSize; i++){
+        playingField[i] = []
+        for(let j=0; j<rowSize; j++){
+            const button = document.createElement('button')
+            button.textContent = '◻️'
+            playingField[i][j] = body.appendChild(button)
+            
+            if(j === (rowSize-1)){
+                const rowBreak = document.createElement('br')
+                body.appendChild(rowBreak)
+            }
+            
+            playingField[i][j].addEventListener('click', function(event){
+                // console.log(i, j)
+                if(player % 2 === 0){
+
+                    // console.log(winner)
+
+                    event.currentTarget.textContent = '🔵'
+                    event.currentTarget.disabled = true
+                    
+                    verticalWinner(i, j, event.currentTarget.textContent)
+                    
+                    horisontalWinner(i, j, event.currentTarget.textContent)
+                    
+                    diagonalWinner(i, j, event.currentTarget.textContent)
+
+                    invertedDiagonalWinner(i, j, event.currentTarget.textContent)
+
+                    playerTurn.textContent = "Player two's turn."
+                }
+                else{
+                    event.currentTarget.textContent = '❌'
+                    event.currentTarget.disabled = true
+                    
+                    verticalWinner(i, j, event.currentTarget.textContent)
+                    
+                    horisontalWinner(i, j, event.currentTarget.textContent)
+                    
+                    diagonalWinner(i, j, event.currentTarget.textContent)
+
+                    invertedDiagonalWinner(i, j, event.currentTarget.textContent)
+
+                    playerTurn.textContent = "Player one's turn."
+                }
+                player++
+                winner = 0
+            })
+        }
+    }
+    playerTurn = body.appendChild(h1Turn) // Vems tur
+}
+
+
 
     // Nedan läser lodrätt
 function verticalWinner(row, col, content){
