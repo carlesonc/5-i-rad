@@ -4,11 +4,11 @@ let player = 0
 let winner = 0
 const youWon = document.createElement('h1')
 
-
 const body = document.querySelector('body')
 const h1Turn = document.createElement('h1')
 h1Turn.id = 'playerTurn'
 
+                // Spelplanets funktion ovan
 for(let i=0; i<rowSize; i++){
     playingField[i] = []
     for(let j=0; j<rowSize; j++){
@@ -61,10 +61,6 @@ for(let i=0; i<rowSize; i++){
     }
 }
 
-// Spelplanets funktion ovan
-
-
-
 
 
 playerTurn = body.appendChild(h1Turn) // Vilken spelare
@@ -73,10 +69,6 @@ playerTurn.textContent = "Player one's turn."
 // Style
 
 const buttonStyle = document.querySelectorAll('body')
-
-
-
-
 
     // Nedan läser lodrätt
 function verticalWinner(row, col, content){
@@ -189,6 +181,7 @@ function diagonalWinner(row, col, content){
     while(startDiagonalRow<0 || startDiagonalCol<0){
         startDiagonalCol++
         startDiagonalRow++
+        console.log(startDiagonalRow + "   " + startDiagonalCol)
     }
     
     let endDiagonalRow = row + 4
@@ -206,10 +199,13 @@ function diagonalWinner(row, col, content){
         endDiagonal = endDiagonalCol
     }
 
-    for(let i = 0; i < endDiagonal; i++){
-        console.log(playingField[startDiagonalRow + 1][startDiagonalCol + i].textContent)
+    for(let i = 0; i <= endDiagonal; i++){
+        if(startDiagonalRow + i > 9 || startDiagonalCol + i > 9){
+            break
+        }
+        console.log(playingField[startDiagonalRow + i][startDiagonalCol + i])
         if(player % 2 === 0){
-            if(playingField[startDiagonalRow + 1][startDiagonalCol + i].textContent === '🔵'){
+            if(playingField[startDiagonalRow + i][startDiagonalCol + i].textContent === '🔵'){
                 winner++
                 if(winner === 5){
                     youWon.textContent = 'PLAYER ONE WON!!!'
