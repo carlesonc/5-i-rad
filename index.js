@@ -15,7 +15,6 @@ const div = document.createElement('div')
 body.appendChild(div)
 for(let i = 0; i < 3; i++){
     const button = document.createElement('button')
-    // button.style.fontSize = 100
     button.textContent = (10 + (i * 5)) + 'x' + (10 + (i * 5))
     sizeButton[i] = div.appendChild(button)
 
