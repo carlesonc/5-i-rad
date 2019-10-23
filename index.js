@@ -21,7 +21,6 @@ for(let i = 0; i < 3; i++){
 
     sizeButton[i].addEventListener('click', function(event){
         rowSize = 10 + (i * 5)
-        console.log(rowSize)
         makeBoard(rowSize)
         body.removeChild(div)
     })
@@ -102,15 +101,8 @@ function verticalWinner(row, col, content){
             if(playingField[i][col].textContent === '🔵'){
                 winner++
                 if (winner === 5) {
-                    youWon.textContent = 'PLAYER ONE WON!!!'
-                    body.append(youWon)
-                    for(let i=0; i<rowSize; i++){
-                        for(let j = 0; j<rowSize; j++){
-                            playingField[i][j].disabled = true
-                        }
-                    }
-                    playerTurn = body.removeChild(h1Turn)
-                break
+                    winning()
+                    break
                 }
             }else{
                 winner = 0
@@ -119,15 +111,8 @@ function verticalWinner(row, col, content){
             if(playingField[i][col].textContent === '❌'){
                 winner++
                 if(winner === 5){
-                    youWon.textContent = 'PLAYER TWO WON!!!'
-                    body.append(youWon)
-                    for(let i=0; i<rowSize; i++){
-                        for(let j = 0; j<rowSize; j++){
-                            playingField[i][j].disabled = true
-                        }
-                    }
-                    playerTurn = body.removeChild(h1Turn)
-                break
+                    winning()
+                    break
                 }
             }else{
                     winner = 0
@@ -155,14 +140,7 @@ function horisontalWinner(row, col, content){
             if(playingField[row][i].textContent === '🔵'){
                 winner++
                 if(winner === 5){
-                    youWon.textContent = 'PLAYER ONE WON!!!'
-                    body.append(youWon)
-                    for(let i=0; i<rowSize; i++){
-                        for(let j = 0; j<rowSize; j++){
-                            playingField[i][j].disabled = true
-                        }
-                    }
-                    playerTurn = body.removeChild(h1Turn)
+                    winning()
                     break
                 }
             }else{
@@ -172,14 +150,7 @@ function horisontalWinner(row, col, content){
             if(playingField[row][i].textContent === '❌'){
                 winner++
                 if(winner === 5){
-                    youWon.textContent = 'PLAYER TWO WON!!!'
-                    body.append(youWon)
-                    for(let i=0; i<rowSize; i++){
-                        for(let j = 0; j<rowSize; j++){
-                            playingField[i][j].disabled = true
-                        }
-                    }
-                    playerTurn = body.removeChild(h1Turn)
+                    winning()
                     break
                 }
             }else{
@@ -223,14 +194,7 @@ function diagonalWinner(row, col, content){
             if(playingField[startDiagonalRow + i][startDiagonalCol + i].textContent === '🔵'){
                 winner++
                 if(winner === 5){
-                    youWon.textContent = 'PLAYER ONE WON!!!'
-                    body.append(youWon)
-                    for(let i=0; i<rowSize; i++){
-                        for(let j = 0; j<rowSize; j++){
-                            playingField[i][j].disabled = true
-                        }
-                    }
-                    playerTurn = body.removeChild(h1Turn)
+                    winning()
                     break
                 }
             }else{
@@ -240,14 +204,7 @@ function diagonalWinner(row, col, content){
             if(playingField[startDiagonalRow + i][startDiagonalCol + i].textContent === '❌'){
                 winner++
                 if(winner === 5){
-                    youWon.textContent = 'PLAYER TWO WON!!!'
-                    body.append(youWon)
-                    for(let i=0; i<rowSize; i++){
-                        for(let j = 0; j<rowSize; j++){
-                            playingField[i][j].disabled = true
-                        }
-                    }
-                    playerTurn = body.removeChild(h1Turn)
+                    winning()
                     break
                 }
             }else{
@@ -291,14 +248,7 @@ function invertedDiagonalWinner(row, col, content){
             if(playingField[startInvertedDiagonalRow - i][startInvertedDiagonalCol + i].textContent === '🔵'){
                 winner++
                 if(winner === 5){
-                    youWon.textContent = 'PLAYER ONE WON!!!'
-                    body.append(youWon)
-                    for(let i=0; i<rowSize; i++){
-                        for(let j = 0; j<rowSize; j++){
-                            playingField[i][j].disabled = true
-                        }
-                    }
-                    playerTurn = body.removeChild(h1Turn)
+                    winning()
                     break
                 }
             }else{
@@ -308,14 +258,7 @@ function invertedDiagonalWinner(row, col, content){
             if(playingField[startInvertedDiagonalRow - i][startInvertedDiagonalCol + i].textContent === '❌'){
                 winner++
                 if(winner === 5){
-                    youWon.textContent = 'PLAYER TWO WON!!!'
-                    body.append(youWon)
-                    for(let i=0; i<rowSize; i++){
-                        for(let j = 0; j<rowSize; j++){
-                            playingField[i][j].disabled = true
-                        }
-                    }
-                    playerTurn = body.removeChild(h1Turn)
+                    winning()
                     break
                 }
             }else{
@@ -326,7 +269,20 @@ function invertedDiagonalWinner(row, col, content){
 }
 
 
-
+function winning(){
+    if(player % 2 === 0){
+        youWon.textContent = 'PLAYER ONE WON!!!'
+    }else{
+        youWon.textContent = 'PLAYER TWO WON!!!'
+    }
+    body.append(youWon)
+    for(let i=0; i<rowSize; i++){
+        for(let j = 0; j<rowSize; j++){
+            playingField[i][j].disabled = true
+        }
+    }
+    playerTurn = body.removeChild(h1Turn)
+}
 
 
 
